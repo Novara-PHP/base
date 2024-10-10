@@ -45,10 +45,15 @@ final class ImportTest extends TestCase
             self::expectException(NovarityNotMetException::class);
         }
 
-        if ($method === 'require') {
-            Novara::Import::require($filename);
-        } else {
-            Novara::Import::include($filename);
+        ob_start();
+        try {
+            if ($method === 'require') {
+                Novara::Import::require($filename);
+            } else {
+                Novara::Import::include($filename);
+            }
+        } finally {
+            ob_end_clean();
         }
 
         if (!$expectException) {
