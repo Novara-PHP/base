@@ -3,13 +3,16 @@
 namespace Novara\Base\Tests\Tests\Internal;
 
 use Novara\Base\Exception\NovarityNotMetException;
+use Novara\Base\Internal\Exception;
 use Novara\Base\Internal\Import;
 use Novara\Base\Novara;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Import::class)]
+#[UsesClass(Exception::class)]
 final class ImportTest extends TestCase
 {
     public static function dataProvider(): array
