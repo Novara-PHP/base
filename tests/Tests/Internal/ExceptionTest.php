@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Novara\Base\Tests\Tests\Internal;
 
 use Exception;

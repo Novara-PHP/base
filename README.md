@@ -34,20 +34,18 @@ composer require novara/base "*"
 
 # Usage
 
-Enforce _novarity_ by replacing `require` and `include` with the library functions.
+## include() and require()
+
+Enforce _novarity¹_ by replacing `require` and `include` with the library functions.
 
 ```php
 Novara::Import::require(__DIR__ . '/autoload.php');
 ```
 
-## Additional functions
+## throwIf()
 
-Currently, Novara Base provides the following functions.
-
-### throwIf
-
-Throws an Exception if the condition evaluates to `false`,
-returns `false` if no Exception was thrown.
+Throws an Exception if the condition evaluates to `true`.
+Returns `false` if no Exception was thrown.
 
 ```php
 Novara::Exception::throwIf(
@@ -56,6 +54,29 @@ Novara::Exception::throwIf(
 );
 ```
 
+## spread()
+
+Reuse a value across multiple calls without creating a dedicated variable.
+
+```php
+// This variable infested block:
+$unnecessaryVariable = SomeService::getWhatever(); // Buffer to not call getWhatever() thrice
+doAThing($unnecessaryVariable);
+doAnotherThing($unnecessaryVariable);
+if ($unnecessaryVariable > 100) {
+    echo 'Wow!';
+}
+
+// becomes utter beauty:
+Novara::Call::spread(
+    SomeService::getWhatever(),
+    doAThing(...),
+    doAnotherThing(...),
+    fn () => func_get_arg(0) > 100 && print 'Wow!',
+);
+```
+
+> ⓘ `spread()` will return `true` if **all** calls return a truthy value, otherwise `false`.
 
 # Why do this?
 
@@ -68,3 +89,7 @@ There a many good reasons to use Novara!
 # Jokes aside
 
 I made this to prove I point. I have yet to find that point...
+
+---
+
+¹ "novarity" describes the complete absence of variables inside a PHP-Script.

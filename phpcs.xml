@@ -8,7 +8,11 @@
     <arg name="colors" />
     <arg name="extensions" value="php"/>
 
-    <rule ref="PSR12" />
+    <rule ref="PSR12">
+        <exclude name="PSR2.Classes.ClassDeclaration.OpenBraceNewLine" />
+        <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine" />
+        <exclude name="Squiz.WhiteSpace.ScopeClosingBrace" />
+    </rule>
     <rule ref="Generic.PHP.RequireStrictTypes"/>
 
     <file>src/</file>

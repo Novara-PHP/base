@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Novara\Base\Internal;
 
 use Novara\Base\Exception\NovarityNotMetException;
@@ -16,6 +18,8 @@ final class Import extends PureStatic
      */
     private static function containsVariables(): false
     {
+        // TODO: block eval if it contains any of the tokens
+        // TODO: does this already block object properties? more tests -> more better
         return Novara::Exception::throwIf(
             count(
                 array_filter(
