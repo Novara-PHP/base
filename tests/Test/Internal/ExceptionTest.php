@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Novara\Base\Tests\Tests\Internal;
+namespace Novara\Base\Tests\Test\Internal;
 
 use Exception;
 use Novara\Base\Novara;

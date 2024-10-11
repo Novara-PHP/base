@@ -34,6 +34,20 @@ composer require novara/base "*"
 
 # Usage
 
+## Superglobals
+
+Superglobals (including `$GLOBALS`) can be accessed read-only.
+
+```php
+// $GLOBALS
+Novara::Globals::GLOBALS();
+
+// $_GET
+Novara::Globals::GET();
+
+// ...
+```
+
 ## include() and require()
 
 Enforce _novarity¹_ by replacing `require` and `include` with the library functions.

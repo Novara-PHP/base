@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Novara\Base\Tests\Tests\Internal;
+namespace Novara\Base\Tests\Test\Internal;
 
 use Novara\Base\Internal\Call;
 use Novara\Base\Novara;

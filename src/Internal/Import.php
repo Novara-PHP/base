@@ -24,7 +24,7 @@ final class Import extends PureStatic
             count(
                 array_filter(
                     PhpToken::tokenize(file_get_contents(func_get_arg(0))),
-                    fn (PhpToken $token) => $token->is([
+                    fn () => func_get_arg(0)->is([
                         T_VARIABLE,
                         T_GLOBAL,
                         T_ENCAPSED_AND_WHITESPACE,

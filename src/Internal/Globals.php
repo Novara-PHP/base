@@ -4,32 +4,17 @@ declare(strict_types=1);
 
 namespace Novara\Base\Internal;
 
+use Novara\Base\Exception\StatelessBypassDetectedException;
 use Novara\Base\PureStatic;
 
 /**
- * Readonly access to superglobals, $argc, and $argv.
+ * Readonly access to superglobals, argc, and argv.
  */
 final class Globals extends PureStatic
 {
-    private static function deepClone(): array
-    {
-        return array_map(
-            fn () => is_array(func_get_arg(0))
-                ? self::deepClone(func_get_arg(0))
-                : (
-                    is_object(func_get_arg(0))
-                        ? clone func_get_arg(0)
-                        : func_get_arg(0)
-                ),
-            func_get_arg(0),
-        );
-    }
-
     public static function GLOBALS(): array
     {
-        // Wish we would be able to have zero variable access, what a shame...
-        // TODO: get_defined_vars() in the global scope should work!
-        return self::deepClone($GLOBALS);
+        return require __DIR__ . '/../purgatory/globals.php';
     }
 
     public static function SERVER(): array
@@ -57,9 +42,14 @@ final class Globals extends PureStatic
         return self::GLOBALS()['_COOKIE'];
     }
 
+    /**
+     * @throws StatelessBypassDetectedException
+     *
+     * @deprecated Do not even think about it!
+     */
     public static function SESSION(): array
     {
-        return self::GLOBALS()['_SESSION'];
+        throw new StatelessBypassDetectedException('Why would you think this works?');
     }
 
     public static function REQUEST(): array
@@ -72,7 +62,7 @@ final class Globals extends PureStatic
         return self::GLOBALS()['_ENV'];
     }
 
-    public static function argc(): array
+    public static function argc(): int
     {
         return self::GLOBALS()['argc'];
     }

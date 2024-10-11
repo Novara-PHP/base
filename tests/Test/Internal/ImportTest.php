@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Novara\Base\Tests\Tests\Internal;
+namespace Novara\Base\Tests\Test\Internal;
 
 use Novara\Base\Exception\NovarityNotMetException;
 use Novara\Base\Internal\Exception;
@@ -23,22 +23,22 @@ final class ImportTest extends TestCase
             'no variable include' => [
                 false,
                 'include',
-                __DIR__ . '/../../Fixtures/good_stuff_without_dollar_signs.php',
+                __DIR__ . '/../../Fixture/good_stuff_without_dollar_signs.php',
             ],
             'with variable include' => [
                 true,
                 'include',
-                __DIR__ . '/../../Fixtures/the_worst_you_can_do.php',
+                __DIR__ . '/../../Fixture/the_worst_you_can_do.php',
             ],
             'no variable require' => [
                 false,
                 'require',
-                __DIR__ . '/../../Fixtures/good_stuff_without_dollar_signs.php',
+                __DIR__ . '/../../Fixture/good_stuff_without_dollar_signs.php',
             ],
             'with variable require' => [
                 true,
                 'require',
-                __DIR__ . '/../../Fixtures/the_worst_you_can_do.php',
+                __DIR__ . '/../../Fixture/the_worst_you_can_do.php',
             ],
         ];
     }
