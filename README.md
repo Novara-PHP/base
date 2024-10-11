@@ -56,6 +56,9 @@ Enforce _novarity¹_ by replacing `require` and `include` with the library funct
 Novara::Import::require(__DIR__ . '/autoload.php');
 ```
 
+> ⓘ You can also autoload via the `\Novara\Base\Autoloader\Loader` class.
+> See [composer.json](composer.json) and [autoload.php](autoload.php).
+
 ## throwIf()
 
 Throws an Exception if the condition evaluates to `true`.
@@ -99,6 +102,7 @@ There a many good reasons to use Novara!
 - You want functional programming? We **enforce** it!
 - Stateless -> Exactly
 - XDEBUG is just _too easy_ to use? Get rid of breakpoints!
+- Your keyboard inconveniently broke in a specific way, not letting you use the Dollar (`$`) symbol
 
 # Jokes aside
 

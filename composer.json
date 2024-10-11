@@ -5,9 +5,9 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Novara\\Base\\": "src/",
             "Novara\\Base\\Tests\\": "tests/"
-        }
+        },
+        "files": ["autoload.php"]
     },
     "authors": [
         {

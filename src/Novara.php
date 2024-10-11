@@ -11,8 +11,10 @@ use Novara\Base\Internal\Exception;
 use Novara\Base\Internal\Globals;
 use Novara\Base\Internal\Import;
 
-final class Novara extends PureStatic
+final class Novara
 {
+    use PureStaticTrait;
+
     public const string Call = Call::class;
     public const string Exception = Exception::class;
     public const string Globals = Globals::class;

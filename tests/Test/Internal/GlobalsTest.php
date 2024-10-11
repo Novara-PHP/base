@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Novara\Base\Tests\Test\Internal;
 
 use Novara\Base\Exception\StatelessBypassDetectedException;
+use Novara\Base\Internal\Globals;
 use Novara\Base\Novara;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-#
+#[CoversClass(Globals::class)]
 final class GlobalsTest extends TestCase
 {
     public function test(): void

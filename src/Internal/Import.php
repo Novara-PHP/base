@@ -5,22 +5,24 @@ declare(strict_types=1);
 namespace Novara\Base\Internal;
 
 use Novara\Base\Exception\NovarityNotMetException;
-use Novara\Base\Novara;
-use Novara\Base\PureStatic;
+use Novara\Base\PureStaticTrait;
 use PhpToken;
 
-final class Import extends PureStatic
+final class Import
 {
+    use PureStaticTrait;
+
     /**
      * Throw an Exception if the included file uses any variables.
      *
      * Stateless > Stateful! Yes this is a joke.
      */
-    private static function containsVariables(): false
+    public static function enforceNovarity(): false
     {
         // TODO: block eval if it contains any of the tokens
         // TODO: does this already block object properties? more tests -> more better
-        return Novara::Exception::throwIf(
+        // Use Exception directly without Novara:: prefix as to enable autoload
+        return Exception::throwIf(
             count(
                 array_filter(
                     PhpToken::tokenize(file_get_contents(func_get_arg(0))),
@@ -44,11 +46,11 @@ final class Import extends PureStatic
 
     public static function include(): mixed
     {
-        return self::containsVariables(func_get_arg(0)) ?: include func_get_arg(0);
+        return self::enforceNovarity(func_get_arg(0)) ?: include func_get_arg(0);
     }
 
     public static function require(): mixed
     {
-        return self::containsVariables(func_get_arg(0)) ?: include func_get_arg(0);
+        return self::enforceNovarity(func_get_arg(0)) ?: include func_get_arg(0);
     }
 }

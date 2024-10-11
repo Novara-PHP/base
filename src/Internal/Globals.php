@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace Novara\Base\Internal;
 
 use Novara\Base\Exception\StatelessBypassDetectedException;
-use Novara\Base\PureStatic;
+use Novara\Base\PureStaticTrait;
 
 /**
  * Readonly access to superglobals, argc, and argv.
  */
-final class Globals extends PureStatic
+final class Globals
 {
+    use PureStaticTrait;
+
     public static function GLOBALS(): array
     {
         return require __DIR__ . '/../purgatory/globals.php';
