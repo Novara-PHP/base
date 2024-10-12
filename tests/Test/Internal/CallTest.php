@@ -87,4 +87,23 @@ final class CallTest extends TestCase
         self::assertSame('Mark', $resultName);
         self::assertSame(27, $resultAge);
     }
+
+    public static function testPass(): void
+    {
+        $callable = function () {
+            return Novara::Call::pass(
+                Novara::Call::args(
+                    [
+                        'name',
+                        'age',
+                    ],
+                    func_get_args(),
+                ),
+                fn () => 'Name: ' . func_get_arg(0)->name . '; Age: ' . func_get_arg(0)->age,
+            );
+        };
+
+        self::assertSame('Name: Michael; Age: 29', $callable('Michael', '29'));
+        self::assertSame('Name: Andrew; Age: 21', $callable('Andrew', '21'));
+    }
 }
