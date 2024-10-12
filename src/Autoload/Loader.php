@@ -3,6 +3,7 @@
 namespace Novara\Base\Autoload;
 
 use Error;
+use Novara\Base\Internal\Call;
 use Novara\Base\Internal\Exception;
 use Novara\Base\Internal\Import;
 use Novara\Base\PureStaticTrait;
@@ -15,6 +16,7 @@ use Novara\Base\PureStaticTrait;
     const array DEPENDENCIES = [
         __DIR__ . '/../PureStaticTrait.php',
         __DIR__ . '/../Internal/Import.php',
+        __DIR__ . '/../Internal/Call.php',
         __DIR__ . '/../Exception/NovaraException.php',
         __DIR__ . '/../Exception/NovarityNotMetException.php',
         __DIR__ . '/../Internal/Exception.php',
@@ -54,20 +56,21 @@ final class Loader
             ) || spl_autoload_register(
                 (function () {
                     /** @noinspection All */
-
                     // As much as it pains me to use $this, it only is used to reference CONSTANT values, not variables.
-                    return str_starts_with(func_get_arg(0), $this::PREFIX)
-                        ?: file_exists(substr(func_get_arg(0), strlen($this::PREFIX)))
-                            ?: require $this::DIRECTORY . DIRECTORY_SEPARATOR . str_replace(
+                    str_starts_with(func_get_arg(0), $this::PREFIX)
+                        && Call::pass(
+                            $this::DIRECTORY . DIRECTORY_SEPARATOR . str_replace(
                                 '\\',
                                 DIRECTORY_SEPARATOR,
                                 substr(func_get_arg(0), strlen($this::PREFIX))
-                            ) . '.php';
+                            ) . '.php',
+                            fn () => file_exists(func_get_arg(0)) && require_once func_get_arg(0),
+                        );
                 })(...)->bindTo(func_get_arg(0))
             );
         } catch (Error $error) {
             die(
-                <<<EOF
+            <<<EOF
                     Did you forget to set PREFIX and DIRECTORY?
                     $error
                     
