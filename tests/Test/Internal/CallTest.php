@@ -48,4 +48,43 @@ final class CallTest extends TestCase
             ),
         );
     }
+
+    public function testArgs(): void
+    {
+        $callable = function () {
+            return Novara::Call::args(
+                [
+                    'foo',
+                ],
+                func_get_args(),
+            )->foo;
+        };
+
+        self::assertSame('1234', $callable('1234'));
+        self::assertSame('a', $callable('a'));
+        self::assertSame(12, $callable(12));
+
+        $resultName = $resultAge = null;
+        $callable = function () use (&$resultName, &$resultAge) {
+            return Novara::Call::spread(
+                Novara::Call::args(
+                    [
+                        'name',
+                        'age',
+                    ],
+                    func_get_args(),
+                ),
+                function () use (&$resultName) {
+                    $resultName = func_get_arg(0)->name;
+                },
+                function () use (&$resultAge) {
+                    $resultAge = func_get_arg(0)->age;
+                },
+            );
+        };
+
+        $callable('Mark', 27);
+        self::assertSame('Mark', $resultName);
+        self::assertSame(27, $resultAge);
+    }
 }

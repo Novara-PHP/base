@@ -24,4 +24,15 @@ final class Call
             array_fill(0, func_num_args() - 1, func_get_arg(0)),
         ));
     }
+
+    /**
+     * Access func_get_args() with names rather than indices.
+     */
+    public static function args(): object
+    {
+        return (object)array_combine(
+            func_get_arg(0),
+            func_get_arg(1),
+        );
+    }
 }

@@ -95,6 +95,41 @@ Novara::Call::spread(
 
 > ⓘ `spread()` will return `true` if **all** calls return a truthy value, otherwise `false`.
 
+## args()
+
+The `Novara::Call::args()` function allows you to ensure novarity yet still have named arguments.
+
+```php
+Novara::Call::args(
+    [
+        'name',
+        'age',
+    ],
+    func_get_args(),
+)->age === ...
+```
+
+This can be combined with the spreading.
+
+```php
+// Share the args through spreading
+return Novara::Call::spread(
+    Novara::Call::args(
+        [
+            'name',
+            'age',
+        ],
+        func_get_args(),
+    ),
+    function () {
+        ... func_get_arg(0)->name ...
+    },
+    function () {
+        ... func_get_arg(0)->age ...
+    },
+);
+```
+
 # Why do this?
 
 There a many good reasons to use Novara!
@@ -102,7 +137,7 @@ There a many good reasons to use Novara!
 - You want functional programming? We **enforce** it!
 - Stateless -> Exactly
 - XDEBUG is just _too easy_ to use? Get rid of breakpoints!
-- Your keyboard inconveniently broke in a specific way, not letting you use the Dollar (`$`) symbol
+- Your keyboard conveniently broke in a specific way, not letting you use the Dollar (`$`) symbol
 
 # Jokes aside
 
