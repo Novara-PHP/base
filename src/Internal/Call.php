@@ -35,4 +35,12 @@ final class Call
             func_get_arg(1),
         );
     }
+
+    /**
+     * Passes a value as function argument.
+     */
+    public static function pass(): mixed
+    {
+        return func_get_arg(1)(func_get_arg(0));
+    }
 }

@@ -95,6 +95,18 @@ Novara::Call::spread(
 
 > ⓘ `spread()` will return `true` if **all** calls return a truthy value, otherwise `false`.
 
+## pass()
+
+`Novara::Call::pass()` re-scopes a value as parameter of a function call.
+Passing allows returning the value from the internal call.
+
+```php
+Novara::Call::pass(
+    MyService::calculateSomethingComplex('foo', 123, func_get_arg(0)),
+    fn () => someFunction(func_get_arg(0)) ?: anotherFunction(func_get_arg(0)),
+)
+```
+
 ## args()
 
 The `Novara::Call::args()` function allows you to ensure novarity yet still have named arguments.
@@ -109,9 +121,21 @@ Novara::Call::args(
 )->age === ...
 ```
 
-This can be combined with the spreading.
+This can be combined with passing or spreading.
 
 ```php
+// Reuse args through passing
+return Novara::Call::pass(
+    Novara::Call::args(
+        [
+            'name',
+            'age',
+        ],
+        func_get_args(),
+    ),
+    fn () => 'Name: ' . func_get_arg(0)->name . '; Age: ' . func_get_arg(0)->age,
+);
+
 // Share the args through spreading
 return Novara::Call::spread(
     Novara::Call::args(
