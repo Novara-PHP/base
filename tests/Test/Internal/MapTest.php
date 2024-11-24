@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 #[UsesClass(Call::class)]
 final class MapTest extends TestCase
 {
-    public static function dataProvider(): array
+    public static function replaceKeyProvider(): array
     {
         return [
             'empty' => [
@@ -51,9 +51,51 @@ final class MapTest extends TestCase
         ];
     }
 
-    #[DataProvider('dataProvider')]
+    public static function appendToKeyProvider(): array
+    {
+        return [
+            'empty' => [
+                [],
+                [],
+                'test',
+                'foo',
+            ],
+            'no append' => [
+                [
+                    'foo' => [13],
+                    'bar' => [37],
+                ],
+                [
+                    'foo' => [13],
+                    'bar' => [37],
+                ],
+                'test',
+                1337,
+            ],
+            'bar append' => [
+                [
+                    'foo' => ['ab'],
+                    'bar' => ['cd', 'ef'],
+                ],
+                [
+                    'foo' => ['ab'],
+                    'bar' => ['cd'],
+                ],
+                'bar',
+                'ef',
+            ],
+        ];
+    }
+
+    #[DataProvider('replaceKeyProvider')]
     public function testReplaceKey(array $expectException, array $input, string $key, mixed $replacement): void
     {
         self::assertSame($expectException, Map::replaceKey($input, $key, $replacement));
+    }
+
+    #[DataProvider('appendToKeyProvider')]
+    public function testAppendToKey(array $expectException, array $input, string $key, mixed $append): void
+    {
+        self::assertSame($expectException, Map::appendToKey($input, $key, $append));
     }
 }

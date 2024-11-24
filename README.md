@@ -177,6 +177,29 @@ Novara::Map::replaceKey(
 ]
 ```
 
+## appendToKey()
+
+Copy-on-write with appended value by key of passed array.
+
+Array must be multidimensional.
+
+```php
+Novara::Map::appendToKey(
+    [
+        'foo' => [1234],
+        'bar' => [13],
+    ],
+    'bar',
+    37,
+);
+
+// results in
+[
+    'foo' => [1234],
+    'bar' => [13, 37],
+]
+```
+
 
 # Why do this?
 
