@@ -19,7 +19,9 @@ final class MapTest extends TestCase
     {
         return [
             'empty' => [
-                [],
+                [
+                    'test' => 'foo',
+                ],
                 [],
                 'test',
                 'foo',
@@ -28,6 +30,7 @@ final class MapTest extends TestCase
                 [
                     'foo' => 13,
                     'bar' => 37,
+                    'test' => 1337,
                 ],
                 [
                     'foo' => 13,
@@ -55,7 +58,9 @@ final class MapTest extends TestCase
     {
         return [
             'empty' => [
-                [],
+                [
+                    'test' => ['foo'],
+                ],
                 [],
                 'test',
                 'foo',
@@ -64,6 +69,7 @@ final class MapTest extends TestCase
                 [
                     'foo' => [13],
                     'bar' => [37],
+                    'test' => [1337],
                 ],
                 [
                     'foo' => [13],
