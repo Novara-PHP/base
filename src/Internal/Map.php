@@ -71,7 +71,7 @@ class Map
                                     return [func_get_arg(0), func_get_arg(1)];
                                 }
 
-                                return [func_get_arg(0), array_merge(func_get_arg(1), [func_get_arg(3)])];
+                                return [func_get_arg(0), array_merge(func_get_arg(1), func_get_arg(3))];
                             },
                             array_keys(func_get_arg(0)),
                             array_values(func_get_arg(0)),
@@ -91,7 +91,7 @@ class Map
                 }
 
                 return array_merge(func_get_arg(0)[0], [
-                    func_get_arg(0)[1] => [func_get_arg(0)[2]],
+                    func_get_arg(0)[1] => func_get_arg(0)[2],
                 ]);
             }
         );

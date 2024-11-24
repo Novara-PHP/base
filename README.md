@@ -190,7 +190,7 @@ Novara::Map::appendToKey(
         'bar' => [13],
     ],
     'bar',
-    37,
+    [37],
 );
 
 // results in

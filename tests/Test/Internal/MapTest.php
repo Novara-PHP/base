@@ -63,7 +63,7 @@ final class MapTest extends TestCase
                 ],
                 [],
                 'test',
-                'foo',
+                ['foo'],
             ],
             'no append' => [
                 [
@@ -76,7 +76,7 @@ final class MapTest extends TestCase
                     'bar' => [37],
                 ],
                 'test',
-                1337,
+                [1337],
             ],
             'bar append' => [
                 [
@@ -88,7 +88,19 @@ final class MapTest extends TestCase
                     'bar' => ['cd'],
                 ],
                 'bar',
-                'ef',
+                ['ef'],
+            ],
+            'bar append multiple' => [
+                [
+                    'foo' => ['ab'],
+                    'bar' => ['cd', 'ef', 'gh'],
+                ],
+                [
+                    'foo' => ['ab'],
+                    'bar' => ['cd'],
+                ],
+                'bar',
+                ['ef', 'gh'],
             ],
         ];
     }
