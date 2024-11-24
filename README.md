@@ -19,17 +19,19 @@ Variables? Disgusting!
 
 </div>
 
-Say "No!" to variables! Don't introduce state to your code. 
+Say "No!" to variables! Don't introduce state to your code.
 
 > 9/10 Variables can be replaced with functional programming.
 > I say let's ignore the remaining one and just do it!
 >
 > &mdash; <cite>Someone Somewhere</cite>
 
+This is an exercise in pain tolerance. 
+
 # Installation
 
 ```bash
-composer require novara/base "*"
+composer require novara/base
 ```
 
 # Usage
@@ -153,6 +155,28 @@ return Novara::Call::spread(
     },
 );
 ```
+
+## replaceKey()
+
+Copy-on-write with changed value by key of passed array.
+
+```php
+Novara::Map::replaceKey(
+    [
+        'foo' => 13,
+        'bar' => 14,
+    ],
+    'bar',
+    37,
+);
+
+// results in
+[
+    'foo' => 13,
+    'bar' => 37,
+]
+```
+
 
 # Why do this?
 

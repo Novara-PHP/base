@@ -6,9 +6,6 @@ namespace Novara\Base\Internal;
 
 use Novara\Base\PureStaticTrait;
 
-/**
- * Lord forgive me for my use of Variables.
- */
 final class Call
 {
     use PureStaticTrait;

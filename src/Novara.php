@@ -10,6 +10,7 @@ use Novara\Base\Internal\Call;
 use Novara\Base\Internal\Exception;
 use Novara\Base\Internal\Globals;
 use Novara\Base\Internal\Import;
+use Novara\Base\Internal\Map;
 
 final class Novara
 {
@@ -19,4 +20,5 @@ final class Novara
     public const string Exception = Exception::class;
     public const string Globals = Globals::class;
     public const string Import = Import::class;
+    public const string Map = Map::class;
 }

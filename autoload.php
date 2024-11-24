@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Novara\Base\Autoload\Loader;
 
 require_once __DIR__ . '/src/Autoload/Loader.php';

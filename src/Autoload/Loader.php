@@ -64,7 +64,15 @@ final class Loader
                                 DIRECTORY_SEPARATOR,
                                 substr(func_get_arg(0), strlen($this::PREFIX))
                             ) . '.php',
-                            fn () => file_exists(func_get_arg(0)) && require_once func_get_arg(0),
+                            function () {
+                                if (!file_exists(func_get_arg(0))) {
+                                    return false;
+                                }
+
+                                require_once func_get_arg(0);
+
+                                return true;
+                            },
                         );
                 })(...)->bindTo(func_get_arg(0))
             );
