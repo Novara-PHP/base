@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Novara\Base\Tests\Test\Internal;
 
+use Novara\Base\Internal\Call;
 use Novara\Base\Internal\Map;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Map::class)]
+#[UsesClass(Call::class)]
 final class MapTest extends TestCase
 {
     public static function dataProvider(): array
