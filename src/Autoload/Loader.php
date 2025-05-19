@@ -25,7 +25,7 @@ use Novara\Base\PureStaticTrait;
         array_map(fn () => require_once func_get_arg(0), self::DEPENDENCIES);
 
         // now that the Import is available, we can retroactively proof novarity
-        array_map(Import::enforceNovarity(...), self::DEPENDENCIES);
+//        array_map(Import::enforceNovarity(...), self::DEPENDENCIES);
     }
 })::load();
 
