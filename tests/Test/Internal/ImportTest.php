@@ -40,6 +40,26 @@ final class ImportTest extends TestCase
                 'require',
                 __DIR__ . '/../../Fixture/the_worst_you_can_do.php',
             ],
+            'parameters with func_get_arg' => [
+                false,
+                'require',
+                __DIR__ . '/../../Fixture/parameters_are_a_necessary_evil.php'
+            ],
+            'evil class' => [
+                true,
+                'require',
+                __DIR__ . '/../../Fixture/evil_class.php',
+            ],
+            'evil static class' => [
+                true,
+                'require',
+                __DIR__ . '/../../Fixture/evil_static_class.php',
+            ],
+            'evil bypass' => [
+                true,
+                'require',
+                __DIR__ . '/../../Fixture/evil_bypass.php',
+            ],
         ];
     }
 

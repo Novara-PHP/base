@@ -20,13 +20,32 @@ final class Import
     public static function enforceNovarity(): false
     {
         // TODO: block eval if it contains any of the tokens
-        // TODO: does this already block object properties? more tests -> more better
         // Use Exception directly without Novara:: prefix as to enable autoload
         return Exception::throwIf(
             count(
                 array_filter(
-                    PhpToken::tokenize(file_get_contents(func_get_arg(0))),
-                    fn () => func_get_arg(0)->is([
+                    explode(
+                        ',',
+                        str_replace(
+                            // ${
+                            '36,123,',
+                            'BAD,',
+                            preg_replace(
+                                // Allow function parameters without using them to enable
+                                // interfaces and their implementation.
+                                '/' . T_FUNCTION . ',' . T_WHITESPACE . ',(\d+,)+' . '123' . '/',
+                                'ALLOWED',
+                                implode(
+                                    ',',
+                                    array_map(
+                                        fn () => func_get_arg(0)->id,
+                                        PhpToken::tokenize(file_get_contents(func_get_arg(0))),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                    fn () => in_array(func_get_arg(0), [
                         T_VARIABLE,
                         T_GLOBAL,
                         T_ENCAPSED_AND_WHITESPACE,
@@ -34,8 +53,9 @@ final class Import
                         T_DOLLAR_OPEN_CURLY_BRACES,
                         T_NUM_STRING,
                         T_STRING_VARNAME,
+                        'BAD',
                     ]),
-                ),
+                )
             ) > 0,
             new NovarityNotMetException(sprintf(
                 'File "%s" contains variables. Unforgivable!',
